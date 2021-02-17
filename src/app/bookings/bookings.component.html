@@ -1,0 +1,26 @@
+<br>
+<br>
+
+ 
+ <p class="center">
+    <mat-form-field appearance="outline">
+      <mat-label>Room</mat-label>
+      <input type="text" matInput placeholder="Room name" [(ngModel)]="bookdata.room_name" required />
+      <mat-icon matSuffix color="primary">home</mat-icon>
+    </mat-form-field>
+  </p>
+  <p class="center">
+    <mat-form-field appearance="outline">
+      <mat-label>Date</mat-label>
+      <input type="text" matInput placeholder="DD-MM-YYYY" [(ngModel)]="bookdata.date" required/>
+      <mat-icon matSuffix color="primary">calendar_today</mat-icon>
+    </mat-form-field>
+  </p>
+  <p class="center">
+    <mat-form-field appearance="outline">
+      <mat-label>Name</mat-label>
+      <input type="text" matInput placeholder="Your Name Here" required [(ngModel)]="bookdata.name"/>
+      <mat-icon matSuffix color="primary">person</mat-icon>
+    </mat-form-field>
+  </p>
+  <p class="center"><button mat-stroked-button (click)="onFormSubmit();openDialog()" color="primary">Book</button></p>

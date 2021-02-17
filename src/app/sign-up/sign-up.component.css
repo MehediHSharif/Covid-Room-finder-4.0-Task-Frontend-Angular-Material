@@ -1,0 +1,6 @@
+.center {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+.mar{margin-top: 100px;}  

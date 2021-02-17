@@ -1,0 +1,39 @@
+<mat-toolbar class="navbar">
+  <span
+    ><strong>D i m e r u </strong>
+    <button mat-button routerLink="/home">Home</button>
+    <button mat-button [routerLink]="['/profile/',ProfileID]">Profile</button>
+    <input
+      class="margin"
+      matInput
+      placeholder="Search"
+      [(ngModel)]="searchLink"
+    />
+    <button mat-icon-button routerLink="/search" (click)="sclick()">
+      <mat-icon>search</mat-icon>
+    </button>
+    <button mat-button routerLink="/customsearch">Custom Search</button>
+  </span>
+
+  <div>
+    <button mat-button routerLink="/login" *ngIf="!authService.loggedIn()">
+      Sign in
+    </button>
+    <button
+      mat-raised-button
+      color="primary"
+      routerLink="/signup"
+      *ngIf="!authService.loggedIn()"
+    >
+      Join
+    </button>
+    <button
+      mat-raised-button
+      color="primary"
+      *ngIf="authService.loggedIn()"
+      (click)="authService.logoutUser()"
+    >
+      Logout
+    </button>
+  </div>
+</mat-toolbar>

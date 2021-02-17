@@ -1,0 +1,77 @@
+<div class="mar">
+  <!-- <p class="center">
+        <mat-form-field appearance="outline">
+          <mat-label>Name</mat-label>
+          <input  matInput placeholder="Your Name Here"  type="text" [(ngModel)]="registerUserData.name" name="name"/>
+          <mat-icon matSuffix color="primary">Name</mat-icon>
+        </mat-form-field>
+      </p> -->
+
+  {{ registerUserData | json }}
+
+
+  <p class="center">create a new account</p>
+
+  <p class="center">
+    <mat-form-field appearance="outline">
+      <mat-label>Username</mat-label>
+      <input
+        matInput
+        placeholder="Username Here"
+        type="text"
+        [(ngModel)]="registerUserData.username"
+        name="email"
+      />
+      <mat-icon matSuffix color="primary">person</mat-icon>
+    </mat-form-field>
+  </p>
+
+  <p class="center">
+    <mat-form-field appearance="outline">
+      <mat-label>Name</mat-label>
+      <input
+        matInput
+        placeholder="Your Name Here"
+        type="text"
+        [(ngModel)]="registerUserData.first_name"
+        name="email"
+      />
+      <mat-icon matSuffix color="primary">Person</mat-icon>
+    </mat-form-field>
+  </p>
+
+
+  <p class="center">
+    <mat-form-field appearance="outline">
+      <mat-label>E-Mail</mat-label>
+      <input
+        matInput
+        placeholder="Your Email Here"
+        type="text"
+        [(ngModel)]="registerUserData.email"
+        name="email"
+      />
+      <mat-icon matSuffix color="primary">email</mat-icon>
+    </mat-form-field>
+  </p>
+  <p class="center">
+    <mat-form-field appearance="outline">
+      <mat-label>Password</mat-label>
+      <input
+        matInput
+        placeholder="Password"
+        type="password"
+        [(ngModel)]="registerUserData.password"
+        name="pass"
+      />
+      <mat-icon matSuffix color="primary">security</mat-icon>
+    </mat-form-field>
+  </p>
+
+  <p class="center">
+    <button mat-stroked-button (click)="registerUser()" color="primary">
+      Sign Up
+    </button>
+  </p>
+</div>
+{{registerUserData|json}}
