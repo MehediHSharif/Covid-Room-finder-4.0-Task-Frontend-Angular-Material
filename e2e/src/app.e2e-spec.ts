@@ -10,7 +10,7 @@ describe('workspace-project App', () => {
 
   it('should display welcome message', () => {
     page.navigateTo();
-    expect(page.getTitleText()).toEqual('dimeru app is running!');
+    expect(page.getTitleText()).toEqual('Covid Room Finder app is running!');
   });
 
   afterEach(async () => {

@@ -10,6 +10,9 @@ export class AuthService {
   private _registerUrl ='http://127.0.0.1:8000/api/auth/register';
   private _loginUrl ='http://127.0.0.1:8000/api/auth/login';
   private _bookurl=this.mainlink ;
+  private _getcapacityurl="http://127.0.0.1:8000/api/rooms-and-bookings/capacity/";
+  private getcapacityurlf;
+  private getallroomsurl="http://127.0.0.1:8000/api/rooms/allrooms/";
 
   constructor(private http: HttpClient, private _router: Router) {}
 
@@ -19,6 +22,10 @@ export class AuthService {
 
   loginUser(user) {
     return this.http.post<any>(this._loginUrl, user);
+  }
+  capacity(user){
+    this.getcapacityurlf = this._getcapacityurl+user;
+    return this.http.get<any>(this.getcapacityurlf);
   }
 
 
@@ -39,5 +46,10 @@ export class AuthService {
   } 
   bookings(user){
     return this.http.post<any>(this._bookurl, user);
+  }
+  getallrooms(){
+
+    return this.http.get<any>(this.getallroomsurl);
+
   }
 }

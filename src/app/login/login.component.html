@@ -1,26 +1,70 @@
-
 <div class="mar">
-
   <p class="center">Log in with existing account</p>
 
+  <form
+    [formGroup]="formGroup"
+    (ngSubmit)="loginUser(formGroup.value)"
+    class="form-element"
+  >
+    <mat-form-field class="center" appearance="outline">
+      <mat-label>Username</mat-label>
+      <input
+        type="text"
+        matInput
+        placeholder="Your Username"
+        formControlName="username"
+      />
+      <mat-icon matSuffix color="primary">email</mat-icon>
+      
+      <mat-error *ngIf="submitted && f.username.errors">
+        Username required
+      </mat-error>
+    </mat-form-field>
 
-<p class="center">
-  <mat-form-field appearance="outline">
-    <mat-label>E-Mail</mat-label>
-    <input type="email" matInput placeholder="Your Email Here" [(ngModel)]="loginUserData.username" name="email" required/>
-    <mat-icon matSuffix color="primary">email</mat-icon>
-  </mat-form-field>
-</p>
-<p class="center">
-  <mat-form-field appearance="outline">
-    <mat-label>Password</mat-label>
-    <input type="password" [(ngModel)]="loginUserData.password"  required matInput placeholder="Password" />
-    <mat-icon matSuffix color="primary">security</mat-icon>
-  </mat-form-field>
-</p>
+    <mat-form-field class="center form-element" appearance="outline">
+      <mat-label>Password</mat-label>
+      <input
+        type="password"
+        matInput
+        placeholder="Password"
+        formControlName="password"
+        [type]="hide ? 'password' : 'text'"
+      />
+      <button
+        mat-icon-button
+        matSuffix
+        (click)="hide = !hide"
+        [attr.aria-label]="'Hide password'"
+        [attr.aria-pressed]="hide"
+      >
+        <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+      </button>
+      <mat-hint><p>*Password minimum length is 6</p> <p>*At least contains a symbol</p></mat-hint>
+  
 
-<p class="center"><button mat-stroked-button (click)="loginUser()" color="primary">Sign In</button></p>
+
+      <mat-error *ngIf="submitted && f.password.errors.required">
+        Password required
+      </mat-error>
+      <mat-error *ngIf="submitted && f.password.errors.pattern">
+        *Password minimum length is 6
+        *At least contains a symbol
+      </mat-error>
+    </mat-form-field>
+    <br><br><br>
+
+    <div class="center form-element">
+      <button
+        mat-stroked-button
+        color="primary"
+        type="submit"
+        class="button"
+        
+      >
+        Sign In
+      </button>
+    </div>
+  </form>
 </div>
-<p class="center">Forgot Your Passwor?<button mat-button routerLink="/resetpassword" color="primary"  >Reset Here</button></p>
 
-{{loginUserData|json}}
+{{ formGroup.value | json}}

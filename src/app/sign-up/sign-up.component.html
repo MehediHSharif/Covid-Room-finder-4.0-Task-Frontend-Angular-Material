@@ -1,77 +1,109 @@
 <div class="mar">
-  <!-- <p class="center">
-        <mat-form-field appearance="outline">
-          <mat-label>Name</mat-label>
-          <input  matInput placeholder="Your Name Here"  type="text" [(ngModel)]="registerUserData.name" name="name"/>
-          <mat-icon matSuffix color="primary">Name</mat-icon>
-        </mat-form-field>
-      </p> -->
+  <p class="center">Create A New Account</p>
 
-  {{ registerUserData | json }}
-
-
-  <p class="center">create a new account</p>
-
-  <p class="center">
-    <mat-form-field appearance="outline">
+  <form
+    [formGroup]="formGroup"
+    (ngSubmit)="registerUser(formGroup.value)"
+    class="form-element"
+  >
+    <mat-form-field class="center" appearance="outline">
       <mat-label>Username</mat-label>
       <input
-        matInput
-        placeholder="Username Here"
         type="text"
-        [(ngModel)]="registerUserData.username"
-        name="email"
-      />
-      <mat-icon matSuffix color="primary">person</mat-icon>
-    </mat-form-field>
-  </p>
-
-  <p class="center">
-    <mat-form-field appearance="outline">
-      <mat-label>Name</mat-label>
-      <input
         matInput
-        placeholder="Your Name Here"
-        type="text"
-        [(ngModel)]="registerUserData.first_name"
-        name="email"
-      />
-      <mat-icon matSuffix color="primary">Person</mat-icon>
-    </mat-form-field>
-  </p>
-
-
-  <p class="center">
-    <mat-form-field appearance="outline">
-      <mat-label>E-Mail</mat-label>
-      <input
-        matInput
-        placeholder="Your Email Here"
-        type="text"
-        [(ngModel)]="registerUserData.email"
-        name="email"
+        placeholder="Your Username"
+        formControlName="username"
       />
       <mat-icon matSuffix color="primary">email</mat-icon>
+
+      <mat-error *ngIf="submitted && f.username.errors">
+        Username required
+      </mat-error>
     </mat-form-field>
-  </p>
-  <p class="center">
-    <mat-form-field appearance="outline">
+
+    <mat-form-field class="center" appearance="outline">
+      <mat-label>First Name</mat-label>
+      <input
+        type="text"
+        matInput
+        placeholder="Your First Name"
+        formControlName="first_name"
+      />
+      <mat-icon matSuffix color="primary">email</mat-icon>
+
+      <mat-error *ngIf="submitted && f.first_name.errors">
+        First Name required
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="center" appearance="outline">
+      <mat-label>Last Name</mat-label>
+      <input
+        type="text"
+        matInput
+        placeholder="Your Last Name"
+        formControlName="last_name"
+      />
+      <mat-icon matSuffix color="primary">email</mat-icon>
+
+      <mat-error *ngIf="submitted && f.last_name.errors">
+        Last Name required
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="center" appearance="outline">
+      <mat-label>Email</mat-label>
+      <input
+        type="text"
+        matInput
+        placeholder="Your Email"
+        formControlName="email"
+      />
+      <mat-icon matSuffix color="primary">email</mat-icon>
+
+      <mat-error *ngIf="submitted && f.last_name.errors">
+        Email required
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="center form-element" appearance="outline">
       <mat-label>Password</mat-label>
       <input
+        type="password"
         matInput
         placeholder="Password"
-        type="password"
-        [(ngModel)]="registerUserData.password"
-        name="pass"
+        formControlName="password"
+        [type]="hide ? 'password' : 'text'"
       />
-      <mat-icon matSuffix color="primary">security</mat-icon>
-    </mat-form-field>
-  </p>
+      <button
+        mat-icon-button
+        matSuffix
+        (click)="hide = !hide"
+        [attr.aria-label]="'Hide password'"
+        [attr.aria-pressed]="hide"
+      >
+        <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+      </button>
+      <mat-hint
+        ><p>*Password minimum length is 6</p>
+        <p>*At least contains a symbol</p></mat-hint
+      >
 
-  <p class="center">
-    <button mat-stroked-button (click)="registerUser()" color="primary">
-      Sign Up
-    </button>
-  </p>
+      <mat-error *ngIf="submitted && f.password.errors.required">
+        Password required
+      </mat-error>
+      <mat-error *ngIf="submitted && f.password.errors.pattern">
+        *Password minimum length is 6 *At least contains a symbol
+      </mat-error>
+    </mat-form-field>
+    <br /><br /><br />
+
+    <div class="center form-element">
+      <button mat-stroked-button color="primary" type="submit" class="button">
+        Sign In
+      </button>
+    </div>
+  </form>
 </div>
-{{registerUserData|json}}
+
+{{ formGroup.value | json }}

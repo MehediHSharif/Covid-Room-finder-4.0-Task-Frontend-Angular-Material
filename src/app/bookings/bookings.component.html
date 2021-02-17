@@ -1,26 +1,79 @@
-<br>
-<br>
+<div class="mar">
+  <p class="center">Book Working Place</p>
+</div>
 
- 
- <p class="center">
-    <mat-form-field appearance="outline">
-      <mat-label>Room</mat-label>
-      <input type="text" matInput placeholder="Room name" [(ngModel)]="bookdata.room_name" required />
-      <mat-icon matSuffix color="primary">home</mat-icon>
-    </mat-form-field>
-  </p>
+<form
+  [formGroup]="formGroup"
+  (ngSubmit)="onFormSubmit(formGroup.value)"
+  class="form-element"
+>
+  <mat-form-field class="center mar" appearance="outline">
+    <mat-label>Select Room</mat-label>
+    <mat-select formControlName="room_name">
+      <mat-option *ngFor="let room of roomsarray" [value]="room">
+        {{ room }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field class="center" appearance="outline">
+    <mat-label>Date</mat-label>
+    <input
+      type="text"
+      matInput
+      placeholder="DD-MM-YYYY"
+      formControlName="date"
+      required
+    />
+    <mat-icon matSuffix color="primary">calendar_today</mat-icon>
+    <mat-error *ngIf="submitted && f.Date.errors"> Date required </mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="center" appearance="outline">
+    <mat-label>Name</mat-label>
+    <input
+      type="text"
+      matInput
+      placeholder="Your Name Here"
+      required
+      formControlName="name"
+    />
+    <mat-icon matSuffix color="primary">person</mat-icon>
+    <mat-error *ngIf="submitted && f.Name.errors"> Name required </mat-error>
+  </mat-form-field>
   <p class="center">
-    <mat-form-field appearance="outline">
-      <mat-label>Date</mat-label>
-      <input type="text" matInput placeholder="DD-MM-YYYY" [(ngModel)]="bookdata.date" required/>
-      <mat-icon matSuffix color="primary">calendar_today</mat-icon>
-    </mat-form-field>
+    <button mat-stroked-button color="primary">
+      Book
+    </button>
   </p>
-  <p class="center">
-    <mat-form-field appearance="outline">
-      <mat-label>Name</mat-label>
-      <input type="text" matInput placeholder="Your Name Here" required [(ngModel)]="bookdata.name"/>
-      <mat-icon matSuffix color="primary">person</mat-icon>
-    </mat-form-field>
-  </p>
-  <p class="center"><button mat-stroked-button (click)="onFormSubmit();openDialog()" color="primary">Book</button></p>
+</form>
+<div class="center response mat-title">{{ bookingdata?.data }}</div>
+<br />
+<div>
+
+</div>
+<br /><br />
+<hr />
+<p class="center">
+  <mat-form-field appearance="outline">
+    <mat-label>Date</mat-label>
+    <input
+      type="text"
+      matInput
+      placeholder="DD-MM-YYYY"
+      [(ngModel)]="vardate"
+      required
+    />
+    <mat-icon matSuffix color="primary">calendar_today</mat-icon>
+  </mat-form-field>
+</p>
+<p class="center">
+  <button
+    mat-stroked-button
+    (click)="getCapacity(); openDialog()"
+    color="primary"
+  >
+    Get Capacity
+  </button>
+</p>
+<div class="center response mat-title">{{ capacitydata }}</div>

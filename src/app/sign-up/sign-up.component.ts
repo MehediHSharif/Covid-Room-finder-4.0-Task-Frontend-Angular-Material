@@ -1,6 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
+import {
+  FormBuilder,
+  FormGroup,
+  FormControl,
+  Validators,
+} from '@angular/forms';
 
 @Component({
   selector: 'app-register',
@@ -8,19 +14,45 @@ import { Router } from '@angular/router';
   styleUrls: ['./sign-up.component.css'],
 })
 export class SignUpComponent implements OnInit {
-  registerUserData = {
-    email: '',
-    password: '',
-    username: '',
-    first_name: '',
-    last_name: 'This',
-  };
-  constructor(private _auth: AuthService, private _router: Router) {}
+  submitted = false;
+  hide = true;
+  formGroup: FormGroup;
 
-  ngOnInit() {}
+  constructor(
+    private formBuilder: FormBuilder,
+    private _auth: AuthService,
+    private _router: Router
+  ) {}
 
-  registerUser() {
-    this._auth.registerUser(this.registerUserData).subscribe(
+  ngOnInit() {
+    this.createForm();
+  }
+
+  createForm() {
+    this.formGroup = this.formBuilder.group({
+      username: ['', Validators.required],
+      password: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(6),
+          Validators.pattern(
+            '(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-zd$@$!%*?&].{6,30}'
+          ),
+        ],
+      ],
+      email: ['', [Validators.required, Validators.email]],
+      first_name: ['', Validators.required],
+      last_name: ['', Validators.required],
+    });
+  }
+
+  get f() {
+    return this.formGroup.controls;
+  }
+
+  registerUser(data) {
+    this._auth.registerUser(data).subscribe(
       (res) => {
         this._router.navigate(['/login']);
         console.log(res);

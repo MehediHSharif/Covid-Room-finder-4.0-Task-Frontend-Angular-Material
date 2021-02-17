@@ -15,6 +15,7 @@ import { AuthGuard } from './auth.guard';
 import { BookingsComponent } from './bookings/bookings.component';
 import { MY_DATE_FORMATS } from './my-date-formats';
 import { MAT_DATE_FORMATS } from '@angular/material/core';
+import {  ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -33,6 +34,7 @@ import { MAT_DATE_FORMATS } from '@angular/material/core';
     MaterialModule,
     FormsModule,
     HttpClientModule,
+    ReactiveFormsModule,
   ],
   providers: [
     AuthService,
